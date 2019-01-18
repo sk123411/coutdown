@@ -1,37 +1,82 @@
-## Welcome to GitHub Pages
+<!DOCTYPE html>
+<html>
+	<head>
+		<style type="text/css">
+		body {
+			background: #f6f6f6;
+		}
 
-You can use the [editor on GitHub](https://github.com/sk123411/coutdown/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+		.countdownContainer{
+			position: absolute;;
+			top: 50%;
+			left: 50%;
+            bottom: 50%;
+            right: 50%;
+			transform : translateX(-50%) translateY(-50%);
+			text-align: center;
+			background: #ddd;
+			border: 1px solid #999;
+			padding: 10px;
+			box-shadow: 0 0 5px 3px #ccc;
+		}
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+		.info {
+			font-size: 40px;
+		}
+		</style>
+	</head>
+	<body>
+		<table class="countdownContainer">
+			<tr class="info">
+			</tr>
+			<tr class="info">
+				<td id="days">120</td>
+				<td id="hours">4</td>
+				<td id="minutes">12</td>
+				<td id="seconds">22</td>
+			</tr>
+			<tr>
+				<td>Days</td>
+				<td>Hours</td>
+				<td>Minutes</td>
+				<td>Seconds</td>
+			</tr>
+		</table>
+		<script type="text/javascript">
 
-### Markdown
+			function countdown(){
+				var now = new Date();
+				var eventDate = new Date(now.getFullYear(), 11, 25);
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+				var currentTiime = now.getTime();
+				var eventTime = eventDate.getTime();
 
-```markdown
-Syntax highlighted code block
+				var remTime = eventTime - currentTiime;
 
-# Header 1
-## Header 2
-### Header 3
+				var s = Math.floor(remTime / 1000);
+				var m = Math.floor(s / 60);
+				var h = Math.floor(m / 60);
+				var d = Math.floor(h / 24);
 
-- Bulleted
-- List
+				h %= 24;
+				m %= 60;
+				s %= 60;
 
-1. Numbered
-2. List
+				h = (h < 10) ? "0" + h : h;
+				m = (m < 10) ? "0" + m : m;
+				s = (s < 10) ? "0" + s : s;
 
-**Bold** and _Italic_ and `Code` text
+				document.getElementById("days").textContent = d;
+				document.getElementById("days").innerText = d;
 
-[Link](url) and ![Image](src)
-```
+				document.getElementById("hours").textContent = h;
+				document.getElementById("minutes").textContent = m;
+				document.getElementById("seconds").textContent = s;
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+				setTimeout(countdown, 1000);
+			}
 
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/sk123411/coutdown/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+			countdown();
+		</script>
+	</body>
+</html>
